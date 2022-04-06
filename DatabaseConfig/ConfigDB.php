@@ -1,6 +1,6 @@
 <?php
-include("../NavBar.php");
-session_start();
+// include("../NavBar.php");
+// session_start();
 
 // Function To Connect To Database Everytime Before Executing A Query
 $ConnectToDataBase = NULL;

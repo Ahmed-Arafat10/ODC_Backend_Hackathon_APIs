@@ -10,7 +10,7 @@ if (isset($_POST['AdminBtn'])) {
     $Password = $_POST['Password'];
 
     $ConnectToDatabase = ConnectToDataBase();
-    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? LIMIT 1";
+    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_name` = ? LIMIT 1";
     //    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
     $Query = $ConnectToDatabase->prepare($SelectStatement);
     $Query->bind_param('s', $AdminUsername);
