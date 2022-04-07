@@ -24,9 +24,18 @@ if ($NumOfRows) {
     $HashedPasswordFromDatabase = $Fetch['password'];
     $Username = $Fetch['student_name'];
     $UserID = $Fetch['id'];
+    $is_verified = $Fetch['is_verified'];
+ 
     // echo json_encode($HashedPasswordFromDatabase);
     //$HashedPasswordFromDatabae = password_hash($Password, PASSWORD_DEFAULT);
     if (password_verify($Password, $HashedPasswordFromDatabase)) {
+        if($is_verified  == 0)
+        {
+            echo json_encode(array(
+                "message" => "Please Verify Your Account First, Check Your Email"
+            ));
+            exit;
+        }
         // Generate A Random Number
         $OTP = rand(100000, 999999);
         // Send OTP To This Email Of User + His Name Is Mentioned

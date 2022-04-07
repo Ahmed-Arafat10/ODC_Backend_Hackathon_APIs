@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 include_once '../../DatabaseConfig/ConfigDB.php';
 include_once '../../UsedFunction/Functions.php';
-
+include_once '../../EmailAPI.php';
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
@@ -17,16 +17,19 @@ $HashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 $Phone = $data->Phone;
 $Address = $data->Address;
 $College = $data->College;
+$Token = md5(rand() + rand() + 11);
 $ConnectToDatabase = ConnectToDataBase();
-$InsertStatement  = "INSERT INTO `students` VALUES(NULL,?,?,?,?,?,?,DEFAULT)";
+$InsertStatement  = "INSERT INTO `students` VALUES(NULL,?,?,?,?,?,?,DEFAULT,?,0)";
 $Query = $ConnectToDatabase->prepare($InsertStatement);
-$Query->bind_param('ssssss', $StudentName, $Email, $HashedPassword, $Phone, $Address, $College);
+$Query->bind_param('sssssss', $StudentName, $Email, $HashedPassword, $Phone, $Address, $College,$Token);
 $CheckError = $Query->execute();
-if ($CheckError)
+if ($CheckError){
+    SendEmailToVerifyAcc($StudentName,$Email,$Token);
     echo json_encode(array(
-        "message" => "Done Adding Student Data"
+        "message" => "Done Adding Student Data",
+        "message1" => "Please Check Your Email To Verify Your New Account",
     ));
-else
+}else
     echo json_encode(array(
         "message" => "Failed To Add Student Data"
     ));
@@ -34,11 +37,11 @@ else
 /*
 I/P:
 {
-    "StudentName":"hisoka",
+    "StudentName":"Ahmed Arafat",
     "Email":"ahmedmoyousry.bis@gmail.com",
     "Password":"123",
     "Phone":"01013769331",
-    "Address":"Hello Course",
+    "Address":"Cairo",
     "College":"BIS"
 }
 
