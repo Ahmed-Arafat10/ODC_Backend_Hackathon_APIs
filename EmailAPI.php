@@ -195,3 +195,46 @@ function InformUserThatPasswordHasChanged($Name, $Email)
         PrintMessage("Email could not be sent. Error: {$mail->ErrorInfo}", "Danger");
     }
 }
+
+function SendInterviewDetails($Name,$Email,$Details)
+{
+    try {
+        $mail = new PHPMailer(true);
+
+        //Server settings
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Username = 'khub.developers.bis@gmail.com'; //SMTP username
+        $mail->Password = 'deihpjvttokamdou'; //SMTP password
+
+        $mail->SMTPSecure = "Tls"; //Enable implicit TLS encryption
+        $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom("khub.developers.bis@gmail.com", $Name);
+        // $mail->addAddress('joe@example.net', 'Joe User');//Add a recipient
+        $mail->addAddress($Email); //Name is optional
+
+        $EmailTemplate = "
+        <h2>Hello, $Name</h2>
+        <h3>This Is An Email For Details Of Interview</h3>
+        <br/><br/>
+        <p>$Details </p>
+        <h4>Best Regards</h4>
+        <h4>Orange Digital Center</h4>
+        ";
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = 'Congratulations, You Passed The Exam';
+        $mail->Body = $EmailTemplate;
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        //echo 'Message has been sent';
+    } catch (Exception $e) {
+        PrintMessage("OTP Could Not Be Sent. Error: {$mail->ErrorInfo}", "Danger");
+    }
+}

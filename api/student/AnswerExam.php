@@ -41,6 +41,21 @@ if(!$num)
     exit;
 }
 
+$SelectStatement = "SELECT * FROM `student_course_enroll` WHERE `student_id` = ? AND `Code` = ? AND NOW() <= NOW() <= DATE_ADD(Code_Date, INTERVAL 2 DAY) ";
+$Query = $ConnectToDatabase->prepare($SelectStatement);
+$Query->bind_param("is",$User_ID,$Code);
+ $Query->execute();
+ $Result = $Query->get_result();
+$num = $Result->num_rows;
+if(!$num)
+{
+    echo json_encode(array(
+        "message" => "Sorry, Code Is Expired As It IsOnly Valid For Two Days"
+    ));
+    exit;
+}
+
+
 
 $TotalRightAnswer = 0;
 $i = 1;
