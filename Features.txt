@@ -1,0 +1,31 @@
+Admin:
+- login
+- add subadmins
+- view all students
+- view student with ID
+- add course
+- edit course
+- add question
+- view all courses
+- view course with ID
+- send exam code
+- send interview email
+- show exams result
+- view student & course enrollment
+
+student:
+- answer exam
+- view profile
+- edit profile
+- enroll in a course
+- generate random questions for exam
+- logout
+- login using otp
+- sign in
+- sign up
+- view running courses
+- view history courses
+- view courses you are not enrolled in
+- view courses you are enrolled in
+
+
