@@ -12,7 +12,7 @@ $SelectStatement = "SELECT * FROM `students` ";
 //    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->query($SelectStatement);
 $Num = $Query->num_rows;
-echo json_encode($Num);
+//echo json_encode($Num);
 if ($Num) {
     $AllStudents = array();
     foreach ($Query as $EachOne) :

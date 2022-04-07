@@ -27,13 +27,19 @@ if ($NumOfRows) {
     $Query->bind_param("ii", $OTP,$UserID);
     $CheckError = $Query->execute();
     // Close Connection After Executing Query
-    $Query->close();
-    $ConnectToDatabase->close();
     if ($CheckError) {
+        $Token = md5(rand() + rand() + 11);
+        $InsertStatement = "INSERT INTO `signedin` VALUES(?,?,DEFAULT)";
+        $Query = $ConnectToDatabase->prepare($InsertStatement);
+        $Query->bind_param("is", $UserID,$Token);
+        $CheckError = $Query->execute();
+        // Close Connection After Executing Query
+        $Query->close();
+        $ConnectToDatabase->close();
         echo json_encode(array(
             "message" => "Welcome Back",
             "UserID" => $UserID,
-            "IsSignedIn" => 1
+            "Token" => $Token
         ));
     } else {
         echo json_encode(array(
@@ -64,7 +70,7 @@ if ($NumOfRows) {
    /*
 {
     "ID":4,
-    "OTP":"730282"
+    "OTP":"683919"
 }
 
    */
