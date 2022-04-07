@@ -28,7 +28,7 @@ $CheckError = $Query->execute();
 $Result = $Query->get_result();
 $NumOfRows = $Result->num_rows;
 if (!$NumOfRows) {
-    $InsertStatement = "INSERT INTO `student_course_enroll` VALUES(NULL,?,?,DEFAULT,NULL,NULL)";
+    $InsertStatement = "INSERT INTO `student_course_enroll` VALUES(NULL,?,?,DEFAULT,NULL,NULL,0)";
     $Query = $ConnectToDatabase->prepare($InsertStatement);
     $Query->bind_param("ii", $UserID, $CourseID);
     $CheckError = $Query->execute();

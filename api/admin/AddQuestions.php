@@ -71,4 +71,18 @@ I/P:
     "exam_id":1
 }
 
+
+
+{
+    "AdminID":2,
+    "question":"hi",
+    "choice1":"hi1",
+    "choice2":"hi2",
+    "choice3":"hi3",
+    "choice4":"hi4 Search",
+    "answer":4,
+    "exam_id":1
+}
+
+
 */
