@@ -1,31 +1,56 @@
 Admin:
 - login
-- add subadmins
+- add subadmins [can view data only cannot add or delete]
 - view all students
-- view student with ID
-- add course
-- edit course
-- add question
+- view a specific student
+- add new course 
+- edit existing course
+- add question [msq question] for specifc exam [each exam is for one course]
 - view all courses
-- view course with ID
-- send exam code
+- view specific course
+- send exam code 
+            - check if entered student id and course id exists
+            - check if code is already student
+            - send code to email 
+            - only for admin [not subadmin]
+this code : - unique
+            - used one time [you can have the exam only one time]
+            - expires after two days of admin sending code date
 - send interview email
-- show exams result
-- view student & course enrollment
+                - check if interview email is already student
+                - send details of interview to email of student
+                - check if entered student id and course id exist
+                - 
+
+- show exams result of all student in a specific course sorted with highest degree
+- view student & course enrollment [each user and corrsponding course]
 
 student:
-- answer exam
-- view profile
+- answer exam for specific course 
+            - check if user has taken exam before or not
+            - check if entered code is wrong
+            - check if code is valid [not expired]
+            - now all 15 random questions will be shown to user
+            - take answer of user for 15 msq question
+            - count number of right answer
+            - output total numbe of questions
+- view profile 
 - edit profile
-- enroll in a course
+- enroll in a course [not enrolled in prevously]
 - generate random questions for exam
+            - 15 msq random questions from 100 questions for a specific course 
 - logout
-- login using otp
-- sign in
-- sign up
+    - if user logged out, all other functionalities in students panel  
+    wont work until user sign in
+- login using otp 
+-otp :  - used only time only
+        - is unique
+        - expired after 5 minutes
+- sign in page
+- sign up page
 - view running courses
 - view history courses
 - view courses you are not enrolled in
-- view courses you are enrolled in
-
-
+- view courses you are enrolled in [with code with 'pending status' or code]
+- passwrod is hashed
+- for students, only will make action and view data when student is logged in

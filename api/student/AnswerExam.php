@@ -50,7 +50,7 @@ $num = $Result->num_rows;
 if(!$num)
 {
     echo json_encode(array(
-        "message" => "Sorry, Code Is Expired As It IsOnly Valid For Two Days"
+        "message" => "Sorry, Code Is Expired As It Is Only Valid For Two Days"
     ));
     exit;
 }

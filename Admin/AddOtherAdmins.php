@@ -14,10 +14,20 @@ if (isset($_SESSION['IsAuthorized'])) {
 }
 
 
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $JSON = file_get_contents('php://input');
+    $date = json_decode(($JSON));
+    echo json_encode($date->email);
+    echo $date['email'];
+
+
+}
+
 
 if (isset($_POST['AddAdminBtn'])) {
     $AdminUsername = $_POST['AdminUserName'];
-    $Password = $_POST['Password'];
+    $Password = $_POST['Password'];//
     $Hashed = password_hash($Password,PASSWORD_DEFAULT);
     $ConnectToDatabase = ConnectToDataBase();
     $InsertStatement = "INSERT INTO `admin` VALUES (NULL,?,?,0)";
