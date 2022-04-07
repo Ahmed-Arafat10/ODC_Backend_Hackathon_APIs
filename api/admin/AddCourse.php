@@ -9,6 +9,15 @@ include_once '../../UsedFunction/Functions.php';
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 $AdminID = $data->AdminID;
+$Token = IsLoggedInAdmin($AdminID);
+if ($Token == 0) {
+    echo json_encode(array(
+        "message" => "Please Log In First"
+    ));
+    exit;
+}
+
+
 $IsAuthourized = CheckIfAdminIsAuthorized($AdminID);
 if($IsAuthourized == 1){
 $CourseName = $data->CourseName;

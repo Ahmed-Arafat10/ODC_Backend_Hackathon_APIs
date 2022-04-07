@@ -1,11 +1,17 @@
+- Email enterd must be email
+
 Admin:
+- check if admin is logged in else will not make any functionality
 - login
+- logout
+    - ID must be valid
 - add subadmins [can view data only cannot add or delete]
 - view all students
 - view a specific student
 - add new course 
 - edit existing course
 - add question [msq question] for specifc exam [each exam is for one course]
+- delete questions
 - view all courses
 - view specific course
 - send exam code 
@@ -25,7 +31,11 @@ this code : - unique
 - show exams result of all student in a specific course sorted with highest degree
 - view student & course enrollment [each user and corrsponding course]
 
+======================================
+======================================
+
 student:
+- check if student is logged in else will not make any functionality
 - answer exam for specific course 
             - check if user has taken exam before or not
             - check if entered code is wrong
@@ -42,12 +52,25 @@ student:
 - logout
     - if user logged out, all other functionalities in students panel  
     wont work until user sign in
+    - ID must be valid
 - login using otp 
 -otp :  - used only time only
         - is unique
         - expired after 5 minutes
 - sign in page
+        - check if account is not verified
+        - check if both username and password are wrong
+        - check is username is correct but password is wrong
+        - check if email [user] does not exists
 - sign up page
+        - password must be strong
+        - check if email already exists
+- forget your password page
+        - a token is send to the entered email
+        - check if email does not exists
+- change your password page [after forget your password request]
+        - check if token is not valid
+        - check if email does not exists
 - view running courses
 - view history courses
 - view courses you are not enrolled in

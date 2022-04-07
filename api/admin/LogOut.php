@@ -8,11 +8,12 @@ include_once '../../UsedFunction/Functions.php';
 include_once '../../EmailAPI.php';
 
 $data = json_decode(file_get_contents("php://input"));
-$UserID = $data->ID;
+$AdminID = $data->AdminID;
 $ConnectToDatabase = ConnectToDataBase();
 
 // I Have To Change `is_Expired` Column To True, So This OTP Become Expired And Cannot Me Used Again
-$SelectStatement = "SELECT * FROM `signedin` WHERE `user_id` = ? ";
+
+$SelectStatement = "SELECT * FROM `signedin_admin` WHERE `admin_id` = ? ";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
 $Query->bind_param("i", $AdminID);
 $CheckError = $Query->execute();
@@ -24,10 +25,9 @@ if (!$num) {
     ));
     exit;
 }
-
-$UpdateStatement = "DELETE FROM  `signedin` WHERE `user_id` = ? ";
-$Query = $ConnectToDatabase->prepare($UpdateStatement);
-$Query->bind_param("i", $UserID);
+$DeleteStatement = "DELETE FROM `signedin_admin` WHERE `admin_id` = ? ";
+$Query = $ConnectToDatabase->prepare($DeleteStatement);
+$Query->bind_param("i", $AdminID);
 $CheckError = $Query->execute();
 // Close Connection After Executing Query
 if ($CheckError)  echo json_encode(array(
@@ -42,7 +42,7 @@ else echo json_encode(array(
 
    /*
 {
-    "ID":6
+    "AdminID":1
 }
 
    */
