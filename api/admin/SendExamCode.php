@@ -58,12 +58,23 @@ if ($IsAuthourized == 1) {
     //echo json_encode($Code);    
     $UpdateStatement = "UPDATE `student_course_enroll` SET `Code` = ? , `Code_Date` = NOW() WHERE `student_id` = ? AND `course_id` = ?";
     $Query = $ConnectToDatabase->prepare($UpdateStatement);
-    $Query->bind_param("sii",$Code, $StudentID, $CourseID);
+    $Query->bind_param("sii", $Code, $StudentID, $CourseID);
     $CheckError = $Query->execute();
-    if ($CheckError) echo json_encode(array(
-        "message" => "Code Is Sent"
-    ));
-    else  echo json_encode(array(
+    if ($CheckError) {
+        $SelectStatement = "SELECT * FROM `students` WHERE `id` = ? LIMIT 1";
+        $Query = $ConnectToDatabase->prepare($SelectStatement);
+        //$Date = "date('Y-m-d H:i:s')"; #Debug
+        $Query->bind_param("s", $Email);
+        $CheckError = $Query->execute();
+        $Result = $Query->get_result();
+        $Fetch = $Result->fetch_assoc();
+        $Username = $Fetch['student_name'];
+        $Email = $Fetch['email'];
+        SendCodeToEmail($Username, $Email,$Code);
+        echo json_encode(array(
+            "message" => "Code Is Sent"
+        ));
+    } else  echo json_encode(array(
         "message" => "Something Went Wrong"
     ));
 } else echo json_encode(array(

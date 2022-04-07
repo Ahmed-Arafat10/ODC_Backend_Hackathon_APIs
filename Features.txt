@@ -26,7 +26,6 @@ this code : - unique
                 - check if interview email is already student
                 - send details of interview to email of student
                 - check if entered student id and course id exist
-                - 
 
 - show exams result of all student in a specific course sorted with highest degree
 - view student & course enrollment [each user and corrsponding course]

@@ -22,6 +22,12 @@ if (CheckEmail($Email, $ConnectToDatabase)) {
     ));
     exit;
 }
+if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(array(
+        "message" => "Invalid Email Format"
+    ));
+    exit;
+  }
 // if (!PasswordStrength($Password)) {
 //     echo json_encode(array(
 //         "message" => "*Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character."
