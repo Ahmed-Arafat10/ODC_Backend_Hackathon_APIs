@@ -7,16 +7,22 @@ include_once '../../DatabaseConfig/ConfigDB.php';
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
+
 $ConnectToDatabase = ConnectToDataBase();
+//select all students
 $SelectStatement = "SELECT * FROM `students` ";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->query($SelectStatement);
 $Num = $Query->num_rows;
 //echo json_encode($Num);
+// if one or more student exists
 if ($Num) {
+    // a bigger array where each student [array] will be stored in it
     $AllStudents = array();
+    // iterate over each record [student] 
     foreach ($Query as $EachOne) :
+        // key which is column name, will be a variable and its value will be assigned to that variable
         extract($EachOne);
+        // store data of student in form of key value pairs 
         $Item = array(
             'id' => $id,
             'student_name' => $student_name,
@@ -32,10 +38,7 @@ if ($Num) {
     // Close Connection After Executing Query
     $Query->close();
     $ConnectToDatabase->close();
-    // If Enterd Username/Email Exists In Database
+    // print data of all students in JSON format
     echo json_encode($AllStudents);
-} else {
-    echo json_encode(array(
-        "message" => "No records"
-    ));
-}
+} else echo json_encode(array("message" => "No records"));
+

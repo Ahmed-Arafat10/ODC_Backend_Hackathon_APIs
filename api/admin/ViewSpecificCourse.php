@@ -7,21 +7,22 @@ include_once '../../DatabaseConfig/ConfigDB.php';
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
-$ID = $data->id;
+// get course id
+$CourseID = $data->CourseID;
 $ConnectToDatabase = ConnectToDataBase();
+// search with that id in `courses` table 
 $SelectStatement = "SELECT * FROM `courses` WHERE id = ?";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
-$Query->bind_param('i', $ID);
+$Query->bind_param('i', $CourseID);
 $Query->execute();
 $Result = $Query->get_result();
 $Num = $Result->num_rows;
 //echo json_encode($Num);
+// if a record exists with that id
 if ($Num) {
-    $AllCourses = array();
     $Fetch = $Result->fetch_assoc();
     extract($Fetch);
-    $Item = array(
+    $Course = array(
         'id' => $id,
         'course_name' => $course_name,
         'course_level' => $course_level,
@@ -35,23 +36,16 @@ if ($Num) {
     // Close Connection After Executing Query
     $Query->close();
     $ConnectToDatabase->close();
-    // If Enterd Username/Email Exists In Database
-    echo json_encode($Item);
-} else {
-    echo json_encode(array(
-        "message" => "No Records"
-    ));
-}
+    echo json_encode($Course);
+} else echo json_encode(array("message" => "No Records"));
+
 
 
 
 /*
 
 {
-    "id":13
+    "CourseID":13
 }
 
 */
-
-?>
-

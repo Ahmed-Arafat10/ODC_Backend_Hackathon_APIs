@@ -8,38 +8,29 @@ include_once '../../UsedFunction/Functions.php';
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
-
+// get id of admin from postman raw
 $AdminID = $data->AdminID;
+// check if admin is athorized to use this page
 $IsAuthourized = CheckIfAdminIsAuthorized($AdminID);
 if ($IsAuthourized == 1) {
-    $ID = $data->id;
+    //get question id
+    $QuestionID = $data->QuestionID;
     $ConnectToDatabase = ConnectToDataBase();
     $DeleteStatement = "DELETE FROM `questions` WHERE id = ?";
-    //    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
     $Query = $ConnectToDatabase->prepare($DeleteStatement);
-    $Query->bind_param('i', $ID);
+    $Query->bind_param('i', $QuestionID);
     $ErrorCheck = $Query->execute();
-    if ($ErrorCheck) {
-        echo json_encode(array(
-            "message" => "Question Is Deleted"
-        ));
-    } else {
-        echo json_encode(array(
-            "message" => "Failed To Deleted Question"
-        ));
-    }
+    if ($ErrorCheck) echo json_encode(array("message" => "Question Is Deleted"));
+    else echo json_encode(array("message" => "Failed To Delete Question"));
 
-    //echo json_encode($Num);
-} else echo json_encode(array(
-    "message" => "Admin Is Not Authorized [Sub-Admin]"
-));
+} else echo json_encode(array( "message" => "Admin Is Not Authorized [Sub-Admin]"));
 
 
 /*
 
 {
     "AdminID":1,
-    "id": 109
+    "QuestionID":100
 }
 
 */

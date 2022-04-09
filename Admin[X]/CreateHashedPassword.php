@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php 
-     $Pass = "Ahmedging241@";
+     $Pass = "123";
    $HashedPass =  password_hash($Pass,PASSWORD_DEFAULT);
    echo  "<h1>$HashedPass</h1>" ;
  ?>   

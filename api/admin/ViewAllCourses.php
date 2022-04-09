@@ -8,8 +8,8 @@ include_once '../../DatabaseConfig/ConfigDB.php';
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 $ConnectToDatabase = ConnectToDataBase();
+// get all courses
 $SelectStatement = "SELECT * FROM `courses` ";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->query($SelectStatement);
 $Num = $Query->num_rows;
 //echo json_encode($Num);
@@ -35,8 +35,4 @@ if ($Num) {
     $ConnectToDatabase->close();
     // If Enterd Username/Email Exists In Database
     echo json_encode($AllCourses);
-} else {
-    echo json_encode(array(
-        "message" => "No Records"
-    ));
-}
+} else echo json_encode(array("message" => "No Records"));

@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 // SendExamCode.php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
@@ -9,8 +9,10 @@ include_once '../../UsedFunction/Functions.php';
 include_once '../../EmailAPI.php';
 
 // Get raw posted data
+// view all students enrolled in a specific course [id]
 $data = json_decode(file_get_contents("php://input"));
 $AdminID = $data->AdminID;
+$CourseID = $data->CourseID;
 $IsAuthourized = CheckIfAdminIsAuthorized($AdminID);
 if ($IsAuthourized == 1) {
     $ConnectToDatabase = ConnectToDataBase();
@@ -19,14 +21,16 @@ FROM `student_course_enroll`
 INNER JOIN `students`
 on `students`.`id` = `student_course_enroll`.`student_id` AND `students`.`id`
 INNER JOIN courses
-on courses.id = student_course_enroll.course_id";
-    //    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
-    $Query = $ConnectToDatabase->query($JoinStatement);
-    $Num = $Query->num_rows;
-    //echo json_encode($Num);
+on courses.id = student_course_enroll.course_id AND courses.id = ? ";
+    // $Query = $ConnectToDatabase->query($JoinStatement);
+    $Query = $ConnectToDatabase->prepare($JoinStatement);
+    $Query->bind_param("i", $CourseID);
+    $Query->execute();
+    $Result = $Query->get_result();
+    $Num = $Result->num_rows;
     if ($Num) {
         $AllCourses = array();
-        foreach ($Query as $EachOne) :
+        foreach ($Result as $EachOne) :
             extract($EachOne);
             $Item = array(
                 'id' => $id,
@@ -34,6 +38,7 @@ on courses.id = student_course_enroll.course_id";
                 'email' => $email,
                 'phone' => $phone,
                 'address' => $address,
+                'CourseID' => $course_id,
                 'college' => $college,
                 'created_at' => $created_at,
                 'course_name' => $course_name,
@@ -50,22 +55,16 @@ on courses.id = student_course_enroll.course_id";
         // Close Connection After Executing Query
         $Query->close();
         $ConnectToDatabase->close();
-        // If Enterd Username/Email Exists In Database
         echo json_encode($AllCourses);
-    } else {
-        echo json_encode(array(
-            "message" => "No Records"
-        ));
-    }
-} else echo json_encode(array(
-    "message" => "Admin Is Not Authorized [Sub-Admin]"
-));
+    } else echo json_encode(array("message" => "No Records"));
+} else echo json_encode(array("message" => "Admin Is Not Authorized [Sub-Admin]"));
 
 /*
 
 
 {
-"AdminID":1
+    "AdminID":1,
+    "CourseID":24
 }
 
 */
