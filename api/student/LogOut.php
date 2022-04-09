@@ -20,7 +20,7 @@ $CheckError = $Query->execute();
 $Result = $Query->get_result();
 $num = $Result->num_rows;
 if (!$num) {
-    echo json_encode(array("message" => "User Is Not Logged In"));
+echo json_encode(array("message" => "User Is Not Logged In"));
     exit;
 }
 // delete token [record] that means user is logged in
