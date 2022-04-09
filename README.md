@@ -2,7 +2,7 @@
 - Our task was to create restful APIs for backend of ODC 
 - this my first time working with restful APIs, it was quite easy & powerful as you will just write the code with any language then it can be used in any
 place .. Wow 
-- I finished this projet in 10H with quite number of feature, it was so great experience 
+- I finished this projet in 10H with quite number of features, it was so great experience 
 # Features Of Project:
 ## Admin Panel :
 - admin login
