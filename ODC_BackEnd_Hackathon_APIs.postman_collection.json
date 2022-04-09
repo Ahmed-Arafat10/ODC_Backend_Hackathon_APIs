@@ -416,7 +416,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"UserID\":4,\r\n    \"student_name\":\"HISOKA\",\r\n    \"email\": \"ahmedmoyousry.bis@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"phone\": \"0101376\",\r\n    \"address\": \"Haram\",\r\n    \"college\": \"BIS\"\r\n}"
+							"raw": "{\r\n    \"UserID\":4,\r\n    \"student_name\":\"HISOKA\",\r\n    \"email\": \"ging@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"phone\": \"0101376\",\r\n    \"address\": \"Haram\",\r\n    \"college\": \"BIS\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/EditProfile.php",
@@ -541,7 +541,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Email\":\"ahmedmoyousry.bis@gmail.com\"\r\n}"
+							"raw": "{\r\n    \"Email\":\"ging@gmail.com\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ForgetYourPassword.php",
@@ -641,7 +641,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Email\":\"ahmedmoyousry.bis@gmail.com\",\r\n    \"Token\":\"27e6e782d5d2b592f7756106dc8b9ceb\"\r\n}"
+							"raw": "{\r\n    \"Email\":\"ging@gmail.com\",\r\n    \"Token\":\"27e6e782d5d2b592f7756106dc8b9ceb\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/VerifyAccount.php",

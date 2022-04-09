@@ -264,7 +264,7 @@ function SendEmailToResetPassword($Name, $Email, $Token)
         <h2>Hello, $Name</h2>
         <h3>This Is An Email To Change Passowrd</h3>
         <br/><br/>
-        <p>Your Your Token is : <b>$Token</b> </p>
+        <p> Your Token is : <b>$Token</b> </p>
         <h4>Best Regards</h4>
         <h4>Orange Digital Center</h4>
         <h4>Ahmed Arafat</h4>
