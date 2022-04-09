@@ -1,8 +1,7 @@
 # Orange Digital Center Backend Hackathon To Create APIs
 - Our task was to create restful APIs for backend of ODC 
 - this my first time working with restful APIs, it was quite easy & powerful as you will just write the code with any language then it can be used in any
-place .. Wow 
-- I finished this projet in 10H with quite number of features, it was so great experience 
+place .. Wow
 # Features Of Project:
 ## Admin Panel :
 - admin login
@@ -80,3 +79,11 @@ place .. Wow
 - student can view history courses
 - student can view courses he is not enrolled in
 - student can view courses he is enrolled in [where code with 'pending status' text or code if it is sent by admin]
+
+
+## Database Schema:
+<img align="center" title="DBSchema" alt="DBSchema" width="100%" src="Documents/DB Schema.png" />
+
+> See You Soon In Another Project ;-)
+
+
