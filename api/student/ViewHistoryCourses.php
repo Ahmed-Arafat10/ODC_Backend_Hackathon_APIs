@@ -8,8 +8,8 @@ include_once '../../UsedFunction/Functions.php';
 // Get raw posted data
 //$data = json_decode(file_get_contents("php://input"));
 $ConnectToDatabase = ConnectToDataBase();
+// get all course that are not currently running
 $SelectStatement = "SELECT * FROM `courses` WHERE `Is_Running` = 0 ";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->query($SelectStatement);
 $Num = $Query->num_rows;
 //echo json_encode($Num);
@@ -33,10 +33,7 @@ if ($Num) {
     // Close Connection After Executing Query
     $Query->close();
     $ConnectToDatabase->close();
-    // If Enterd Username/Email Exists In Database
+    // print output in JSON format
     echo json_encode($AllCourses);
-} else {
-    echo json_encode(array(
-        "message" => "No Records"
-    ));
-}
+} else echo json_encode(array("message" => "No Records"));
+

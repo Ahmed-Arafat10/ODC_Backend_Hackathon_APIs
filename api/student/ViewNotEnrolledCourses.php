@@ -8,16 +8,17 @@ include_once '../../UsedFunction/Functions.php';
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
-$UserID = $data->ID;    
+// get id of user
+$UserID = $data->UserID;
+//checko if user is logged in or not
 $Token = IsLoggedIn($UserID);
 if ($Token == 0) {
-    echo json_encode(array(
-        "message" => "Please Log In First"
-    ));
+    echo json_encode(array("message" => "Please Log In First"));
     exit;
 }
 
 $ConnectToDatabase = ConnectToDataBase();
+// get all courses in which user is not enrolled in it
 $JoinStatement = "SELECT 
 *
 FROM `student_course_enroll`
@@ -26,7 +27,6 @@ on `students`.`id` = `student_course_enroll`.`student_id` AND `students`.`id` = 
 RIGHT JOIN courses
 on courses.id = student_course_enroll.course_id
 WHERE students.id is null;";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->prepare($JoinStatement);
 $Query->bind_param("i",$UserID);
 $Query->execute();
@@ -38,7 +38,7 @@ if ($Num) {
     foreach ($Result as $EachOne) :
         extract($EachOne);
         $Item = array(  
-            'course_name' => $EachOne['course_name'],
+            'course_name' => $course_name,
             'course_level' => $course_level,
             'description' => $description,
             'created_at' => $created_at,
@@ -52,10 +52,14 @@ if ($Num) {
     // Close Connection After Executing Query
     $Query->close();
     $ConnectToDatabase->close();
-    // If Enterd Username/Email Exists In Database
+    // print output in JSON format
     echo json_encode($AllCourses);
-} else {
-    echo json_encode(array(
-        "message" => "No Records"
-    ));
+} else echo json_encode(array("message" => "No Records"));
+
+/*
+
+{
+    "UserID":4
 }
+
+*/

@@ -1,0 +1,782 @@
+{
+	"info": {
+		"_postman_id": "9fcbf7c2-1747-4c7a-834a-2e6e993a1cb2",
+		"name": "ODC_BackEnd_Hackathon_APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "LogInAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"AdminName\":\"arafat\",\r\n \"Password\":\"123\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/LogInAdmin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"LogInAdmin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"CourseName\":\"PHP 8\",\r\n    \"Level\":\"Advanced\",\r\n    \"Description\":\"Web Develpment\",\r\n    \"Category_ID\":2,\r\n    \"Course_Tag\":\"PHP8\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/AddCourse.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"AddCourse.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddQuestions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"question\":\"... is an algorithm\",\r\n    \"choice1\":\"stack\",\r\n    \"choice2\":\"queue\",\r\n    \"choice3\":\"graph\",\r\n    \"choice4\":\"Binary Search\",\r\n    \"answer\":4,\r\n    \"exam_id\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/AddQuestions.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"AddQuestions.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSubAdmins",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"AdminName\":\"ging\",\r\n    \"Password\":\"123\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/AddSubAdmins.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"AddSubAdmins.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteQuestion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"QuestionID\": 100\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/DeleteQuestion.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"DeleteQuestion.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"id\": 13,\r\n    \"course_name\": \"Data\",\r\n    \"course_level\": \"Easy\",\r\n    \"description\": \"Hello Course\",\r\n    \"created_at\": \"2022-04-06 21:22:16\",\r\n    \"category_id\": 2,\r\n    \"course_tag\": \"sss\",\r\n    \"is_running\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/EditCourse.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"EditCourse.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogOut",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/LogOut.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"LogOut.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendExamCode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"AdminID\":1,\r\n\"StudentID\":1,\r\n\"CourseID\":24\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/SendExamCode.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"SendExamCode.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendInterviewData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"StudentID\":4,\r\n\"ExamID\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/SendInterviewData.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"SendInterviewData.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowExamsResults",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"CourseID\":24\r\n }"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ShowExamsResults.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ShowExamsResults.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewAllCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ViewAllCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ViewAllCourses.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewAllEnrolledCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AdminID\":1,\r\n    \"CourseID\":24\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ViewAllEnrolledCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ViewAllEnrolledCourses.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewAllStudents",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ViewAllStudents.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ViewAllStudents.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewSpecificCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CourseID\":13\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ViewSpecificCourse.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ViewSpecificCourse.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewSpecificStudent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"StudentID\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/admin/ViewSpecificStudent.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"admin",
+								"ViewSpecificStudent.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "AnswerAnExamByUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserData\":\r\n    {\r\n        \"ID\":4,\r\n        \"Code\":\"ALGO46826\"\r\n    },\r\n    \r\n    \"Answer\":\r\n    {\r\n        \"q1\":1,\r\n        \"q2\":1,\r\n        \"q3\":1,\r\n        \"q4\":1,\r\n        \"q5\":1,\r\n        \"q6\":1,\r\n        \"q7\":1,\r\n        \"q8\":1,\r\n        \"q9\":1,\r\n        \"q10\":1,\r\n        \"q11\":1,\r\n        \"q12\":1,\r\n        \"q13\":1,\r\n        \"q14\":1,\r\n        \"q15\":1\r\n    },\r\n    \"Q1\": {\r\n        \"id\": 48,\r\n        \"question\": \"Question Number #41\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q2\": {\r\n        \"id\": 24,\r\n        \"question\": \"Question Number #17\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q3\": {\r\n        \"id\": 82,\r\n        \"question\": \"Question Number #75\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q4\": {\r\n        \"id\": 92,\r\n        \"question\": \"Question Number #85\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q5\": {\r\n        \"id\": 45,\r\n        \"question\": \"Question Number #38\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q6\": {\r\n        \"id\": 67,\r\n        \"question\": \"Question Number #60\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q7\": {\r\n        \"id\": 42,\r\n        \"question\": \"Question Number #35\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q8\": {\r\n        \"id\": 58,\r\n        \"question\": \"Question Number #51\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q9\": {\r\n        \"id\": 56,\r\n        \"question\": \"Question Number #49\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q10\": {\r\n        \"id\": 66,\r\n        \"question\": \"Question Number #59\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q11\": {\r\n        \"id\": 12,\r\n        \"question\": \"Question Number #5\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q12\": {\r\n        \"id\": 35,\r\n        \"question\": \"Question Number #28\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q13\": {\r\n        \"id\": 27,\r\n        \"question\": \"Question Number #20\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q14\": {\r\n        \"id\": 93,\r\n        \"question\": \"Question Number #86\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"4\",\r\n        \"exam_id\": 1\r\n    },\r\n    \"Q15\": {\r\n        \"id\": 23,\r\n        \"question\": \"Question Number #16\",\r\n        \"choice1\": \"MSQ 1\",\r\n        \"choice2\": \"MSQ 2\",\r\n        \"choice3\": \"MSQ 3\",\r\n        \"choice4\": \"MSQ 4\",\r\n        \"answer\": \"1\",\r\n        \"exam_id\": 1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/AnswerAnExamByUser.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"AnswerAnExamByUser.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditProfile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\":4,\r\n    \"student_name\":\"HISOKA\",\r\n    \"email\": \"ahmedmoyousry.bis@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"phone\": \"0101376\",\r\n    \"address\": \"Haram\",\r\n    \"college\": \"BIS\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/EditProfile.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"EditProfile.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EnrollInACourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ID\":1,\r\n    \"CourseID\":24\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/EnrollInACourse.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"EnrollInACourse.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GenerateRandomQuestions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ExamID\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/GenerateRandomQuestions.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"GenerateRandomQuestions.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogOut",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\":6\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/LogOut.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"LogOut.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"ID\":6,\r\n        \"OTP\":\"767145\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/OTP.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"OTP.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ForgetYourPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"ahmedmoyousry.bis@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ForgetYourPassword.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ForgetYourPassword.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ResetYourPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"ging@gmail.com\",\r\n    \"TokenForChangingPassword\":\"XX\",\r\n    \"NewPassword\":\"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ResetYourPassword.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ResetYourPassword.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"ging@gmail.com\",\r\n    \"Password\":\"123\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/SignIn.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"SignIn.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"StudentName\":\"Ahmed Arafat\",\r\n    \"Email\":\"ahmed222s@gmail.com\",\r\n    \"Password\":\"ASADASDMmddd333$$\",\r\n    \"Phone\":\"015488410\",\r\n    \"Address\":\"Cairo\",\r\n    \"College\":\"BIS\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/SignUp.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"SignUp.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerifyAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"ahmedmoyousry.bis@gmail.com\",\r\n    \"Token\":\"27e6e782d5d2b592f7756106dc8b9ceb\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/VerifyAccount.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"VerifyAccount.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewEnrolledCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\":4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ViewEnrolledCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ViewEnrolledCourses.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewHistoryCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ViewHistoryCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ViewHistoryCourses.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewNotEnrolledCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\":4\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ViewNotEnrolledCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ViewNotEnrolledCourses.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewProfile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\":1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ViewProfile.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ViewProfile.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/ODC_BackEnd_Marathon/api/student/ViewRunningCourses.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"ODC_BackEnd_Marathon",
+								"api",
+								"student",
+								"ViewRunningCourses.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

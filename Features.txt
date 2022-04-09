@@ -1,6 +1,6 @@
-- Email enterd must be email
-
+--------
 Admin:
+--------
 - check if admin is logged in else will not make any functionality
 - login
 - logout
@@ -33,7 +33,10 @@ this code : - unique
 ======================================
 ======================================
 
-student:
+--------
+Student:
+--------
+
 - check if student is logged in else will not make any functionality
 - answer exam for specific course 
             - check if user has taken exam before or not
@@ -62,14 +65,16 @@ student:
         - check is username is correct but password is wrong
         - check if email [user] does not exists
 - sign up page
-        - password must be strong
-        - check if email already exists
+        - password must be strong [validation]
+	- Email enterd by user must be valid [@XYZ.ABC] [validation]
+        - check if Email already exists
 - forget your password page
         - a token is send to the entered email
         - check if email does not exists
 - change your password page [after forget your password request]
         - check if token is not valid
         - check if email does not exists
+        - send an email to user to infrom him that his password has been changed
 - view running courses
 - view history courses
 - view courses you are not enrolled in

@@ -8,66 +8,72 @@ include_once '../../DatabaseConfig/ConfigDB.php';
 
 $ConnectToDatabase = ConnectToDataBase();
 
-$data = json_decode(file_get_contents("php://input"),true);
-$User_ID = $data["UserID"]["ID"];
-$Code = $data["UserID"]["Code"];
+$data = json_decode(file_get_contents("php://input"), true);
+// get some data this will be used along API
+$User_ID = $data["UserData"]["ID"];
+$Code = $data["UserData"]["Code"];
 $Exam_ID =  $data["Q1"]["exam_id"];
 // echo $data["Answer"]['q1'];
+// check if user has taken the exam or not
 $SelectStatement = "SELECT * FROM `exam_result` WHERE `student_id` = ? AND `exam_id` = ?";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
-$Query->bind_param("ii",$User_ID,$Exam_ID);
- $Query->execute();
- $Result = $Query->get_result();
+$Query->bind_param("ii", $User_ID, $Exam_ID);
+$Query->execute();
+$Result = $Query->get_result();
 $num = $Result->num_rows;
-if($num)
-{
-    echo json_encode(array(
-        "message" => "You Have Taken This Exam Before"
-    ));
+// if he has taken it
+if ($num) {
+    echo json_encode(array("message" => "You Have Taken This Exam Before"));
     exit;
 }
-
-$SelectStatement = "SELECT * FROM `student_course_enroll` WHERE `student_id` = ? AND `Code` = ?";
+// to check if used code to take the exam is correct or not
+$SelectStatement = " SELECT * FROM `student_course_enroll` WHERE `student_id` = ? AND `Code` = ? ";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
-$Query->bind_param("is",$User_ID,$Code);
- $Query->execute();
- $Result = $Query->get_result();
+$Query->bind_param("is", $User_ID, $Code);
+$Query->execute();
+$Result = $Query->get_result();
 $num = $Result->num_rows;
-if(!$num)
-{
-    echo json_encode(array(
-        "message" => "This Code Is Wrong"
-    ));
+if (!$num) {
+    echo json_encode(array("message" => "This Code Is Wrong"));
     exit;
 }
-
-$SelectStatement = "SELECT * FROM `student_course_enroll` WHERE `student_id` = ? AND `Code` = ? AND NOW() <= NOW() <= DATE_ADD(Code_Date, INTERVAL 2 DAY) ";
+// to check if code is expired or not [user can take exam within two days when code is sent to him]
+$SelectStatement = "SELECT * FROM `student_course_enroll` WHERE `student_id` = ? AND `Code` = ? AND NOW() <= DATE_ADD(Code_Date, INTERVAL 2 DAY) ";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
-$Query->bind_param("is",$User_ID,$Code);
- $Query->execute();
- $Result = $Query->get_result();
+$Query->bind_param("is", $User_ID, $Code);
+$Query->execute();
+$Result = $Query->get_result();
 $num = $Result->num_rows;
-if(!$num)
-{
-    echo json_encode(array(
-        "message" => "Sorry, Code Is Expired As It Is Only Valid For Two Days"
-    ));
+if (!$num) {
+    echo json_encode(array("message" => "Sorry, Code Is Expired As It Is Only Valid For Two Days"));
     exit;
 }
 
+/*
+now i will make a key [answer] that contains pairs of user answer for each question in this format
+QuestionNumber:Answer[1/2/3/4]
+Like This
+"q1":1,
+"q2":4,
+"q3":2,
+....
+....
+"q14":3,
+"q14":1
+*/
 
 
+// count number of correct answer for each questions
 $TotalRightAnswer = 0;
 $i = 1;
-for($j=0;$j<15;$j++)
-{
-    $key1 = "q".$i;
-    $UserAns = $data["Answer"][$key1];
-   
-    $key2 = "Q".$i;
-    $RightAns = $data[$key2]["answer"];
-    if($UserAns == $RightAns) $TotalRightAnswer++;
-   // echo $UserAns . "-->".  $RightAns;
+for ($j = 0; $j < 15; $j++) {
+    $AnswerKey = "q" . $i;
+    $UserAns = $data["Answer"][$AnswerKey];
+
+    $QuestionNumKey = "Q" . $i;
+    $RightAns = $data[$QuestionNumKey]["answer"];
+    if ($UserAns == $RightAns) $TotalRightAnswer++;
+    // echo $UserAns . "-->".  $RightAns;
     $i++;
 }
 
@@ -76,44 +82,25 @@ for($j=0;$j<15;$j++)
 //echo "this".$Exam_ID;
 //echo "this".$User_ID;
 
+// after finishing exam, insert result of exam in `exam_result` table
 $InsertStatement = "INSERT INTO `exam_result` VALUES (NULL,15,?,?,?)";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->prepare($InsertStatement);
 $Query->bind_param('iii', $TotalRightAnswer, $Exam_ID, $User_ID);
 $ErrorCheck = $Query->execute();
-// If Enterd Username/Email Exists In Database
-if ($ErrorCheck) {
-    $JoinStatement = "SELECT DISTINCT exams.course_id AS _ID_ FROM questions
-    INNER JOIN exams
-    on exams.id = questions.exam_id;";
-    $Query = $ConnectToDatabase->query($JoinStatement);
-    $Result = $Query->fetch_assoc();
-    $CourseID = $Result['_ID_'];
-    
 
-    $InsertStatement = "UPDATE `student_course_enroll` SET Is_Code_Expired = 1 WHERE `student_id` = ? AND `course_id` = ? ";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
-$Query = $ConnectToDatabase->prepare($InsertStatement);
-$Query->bind_param('ii', $User_ID, $CourseID);
-$ErrorCheck = $Query->execute();
-    echo json_encode(array(
-        "message" => "The Exam Has Been Finished, Good Luck :)"
-    ));
-}
-else{
-    echo json_encode(array(
-        "message" => "Something Went Wrong Try Again"
-    ));
-}
+if ($ErrorCheck) echo json_encode(array("message" => "The Exam Has Been Finished, Good Luck :)"));
+else echo json_encode(array("message" => "Something Went Wrong Try Again"));
+
 
 /*
 {
-    "UserID":
+    "UserData":
     {
         "ID":4,
         "Code":"ALGO46826"
     },
-     "Answer":
+    
+    "Answer":
     {
         "q1":1,
         "q2":1,

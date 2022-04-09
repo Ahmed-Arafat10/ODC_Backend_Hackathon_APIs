@@ -7,10 +7,11 @@ include_once '../../DatabaseConfig/ConfigDB.php';
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
+// get id of exam
 $ExamID = $data->ExamID;
 $ConnectToDatabase = ConnectToDataBase();
+// get all questions that are associated to that exam [exam refers to course]
 $SelectStatement = "SELECT * FROM `questions` WHERE `exam_id` = ?";
-//    $SelectStatement = "SELECT * FROM `admin` WHERE `admin_username` = ? OR `password` = ? LIMIT 1";
 $Query = $ConnectToDatabase->prepare($SelectStatement);
 $Query->bind_param("i", $ExamID);
 $Query->execute();
@@ -18,57 +19,50 @@ $Result = $Query->get_result();
 $Num = $Result->num_rows;
 //echo json_encode($Num);
 if ($Num) {
-    $AllStudents= array();
-    $cnt = 1;
+    $AllQuestions = array();
     foreach ($Result as $EachOne) :
         extract($EachOne);
-        $Item = array(
-                'id' => $id,
-                'question' => $question,
-                'choice1' => $choice1,
-                'choice2' => $choice2,
-                'choice3' => $choice3,
-                'choice4' => $choice4,
-                'answer' => $answer,
-                'exam_id' => $exam_id
-           
+        $EachQuestion = array(
+            'id' => $id,
+            'question' => $question,
+            'choice1' => $choice1,
+            'choice2' => $choice2,
+            'choice3' => $choice3,
+            'choice4' => $choice4,
+            'answer' => $answer,
+            'exam_id' => $exam_id
         );
-        array_push($AllStudents, $Item);
-        $cnt++;
+        array_push($AllQuestions, $EachQuestion);
     endforeach;
 
     // Close Connection After Executing Query
     $Query->close();
     $ConnectToDatabase->close();
-    // If Enterd Username/Email Exists In Database
+
     // echo json_encode($AllStudents[1]);
-    $sz = count($AllStudents);
+    // get number of questions for that exam
+    $sz = count($AllQuestions);
+    // array to store random questions
     $RandQuestion = array();
-    $Keys = array();
+    $Index = array();
     $x = 1;
     while (count($RandQuestion) != 15) {
-        $Rang = rand() % count($AllStudents);
-        if (!in_array($Rang, $Keys)) {
-            $RandQuestion["Q".$x] = $AllStudents[$Rang];
-            $Keys[] = $Rang;
+        $Rang = rand() % count($AllQuestions);
+        // check if rand index generated not in used index before
+        if (!in_array($Rang, $Index)) {
+            $RandQuestion["Q" . $x] = $AllQuestions[$Rang];
+            $Index[] = $Rang;
             $x++;
         }
     }
     echo json_encode($RandQuestion);
     //echo json_encode(count($RandQuestion));
-} else {
-    echo json_encode(array(
-        "message" => "No records"
-    ));
-}
+} else echo json_encode(array("message" => "No Exam With Such ID"));
 
 /*
 
 {
     "ExamID":1
 }
-
-
-
 
 */
