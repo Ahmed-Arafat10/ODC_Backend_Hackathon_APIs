@@ -84,6 +84,6 @@ place .. Wow
 ## Database Schema:
 <img align="center" title="DBSchema" alt="DBSchema" width="100%" src="Documents/DB Schema.png" />
 
-> See You Soon In Another Project ;-)
+> See You Soon In Another Projects ;-)
 
 
