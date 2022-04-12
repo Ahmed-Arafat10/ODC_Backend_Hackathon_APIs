@@ -1,6 +1,6 @@
 # Orange Digital Center Backend Hackathon
 - Our task was to create restful APIs for backend of ODC's applications
-- this my first time working with restful APIs, it was quite easy & powerful as you will just write the code with any language then it can be used in any
+- This is my first time working with restful APIs, it was quite easy & powerful as you will just write the code with any language then it can be used in any
 place .. Wow
 # Features Of Project:
 ## Admin Panel :
@@ -20,13 +20,13 @@ place .. Wow
 - send exam code :
 	- check if entered student id and course id exists
 	- check if code is already sent
-	- send code to email 
+	- send code to student's email 
 	- this feature is only for admin [not subadmin]
  - this code is : 
 	- unique
 	- used one time [you can have the exam only one time]
 	- expired after two days of admin sending code date
-- send interview email :
+- send interview details to student's email :
 	- check if entered student id and course id exist
 	- check if interview email is already sent
 	- send details of interview to email of student
@@ -61,7 +61,7 @@ place .. Wow
         - check if account is not verified
         - check if both username and password are wrong
         - check is username is correct but password is wrong
-        - check if email [user] does not exists
+        - check if entered email [user] does not exists
 - sign up page
 	- password must be strong [validation]
 	- Email enterd by user must be valid [@XYZ.ABC] [validation]
